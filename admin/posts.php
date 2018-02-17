@@ -1,4 +1,4 @@
-<?php include_once 'config.php';
+<?php include_once '../config.php';
 $query=$pdo->prepare('SELECT * FROM blog_posts ORDER BY id DESC');
 $query->execute();
 $blogPosts=$query->fetchAll(PDO::FETCH_ASSOC);
@@ -20,28 +20,29 @@ $blogPosts=$query->fetchAll(PDO::FETCH_ASSOC);
       <div class="row">
         <div class="col-md-12">
           <h1>Blog Title</h1>
+
         </div>
       </div>
     <div class="row">
       <div class="col-md-8">
-        <?php
-          foreach ($blogPosts as $blogPost) {
-            echo '<div class="blog-post">';
-            echo '<h2>'.$blogPost['title'].'</h2>';
-            echo '<p>Jan 1,2020 by <a href="#">Alex</a></p>';
-            echo '<div class="blog-post-image">';
-            echo '<img src="images/keyboard.jpg" alt="">';
-            echo '</div>';
-            echo '<div class="blog-post-content">';
-            echo $blogPost['content'];
-            echo '</div>';
-            echo '</div>';
-
-          }
-         ?>
-
-
-
+        <h2>Posts</h2>
+        <a class="btn btn-primary" href="insert-post.php">New Post</a>
+        <table class="table">
+            <tr>
+                <th>Title</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+          <?php
+            foreach ($blogPosts as $blogPost) {
+              echo '<tr>';
+              echo '<td>'.$blogPost['title'].'</td>';
+              echo '<td>Edit</td>';
+              echo '<td>Delete</td>';
+              echo '</tr>';
+            }
+           ?>
+        </table>
 
       </div>
 
