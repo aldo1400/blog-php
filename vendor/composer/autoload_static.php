@@ -11,12 +11,20 @@ class ComposerStaticInitfbbe6acaadfc6b403f76e8f119d22a31
         array (
             'Phroute\\Phroute\\' => 16,
         ),
+        'A' => 
+        array (
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Phroute\\Phroute\\' => 
         array (
             0 => __DIR__ . '/..' . '/phroute/phroute/src/Phroute',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 
