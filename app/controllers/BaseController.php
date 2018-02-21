@@ -20,7 +20,7 @@ class BaseController
   }
 
   // Llama a la funcion render a traves del objeto que se encuentra en el atributo templateEngine
-  public function render($fileName,$data){
+  public function render($fileName,$data=[]){
     return $this->templateEngine->render($fileName,$data);
   }
 
