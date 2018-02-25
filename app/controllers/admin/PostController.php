@@ -38,7 +38,7 @@ class PostController extends BaseController
     }
     else{
       $errors=$validator->getMessages();
-      
+
     }
 
   return $this->render('admin/insert-post.twig',[
