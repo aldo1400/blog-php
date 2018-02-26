@@ -17,6 +17,11 @@ class BaseController
     $this->templateEngine->addFilter(new \Twig_SimpleFilter('url',function($path){
       return BASE_URL.$path;
     }));
+
+    $this->templateEngine->addFilter(new \Twig_SimpleFilter('url1',function($path){
+      return BASE_URL.'admin/users/edit/'.$path;
+    }));
+
   }
 
   // Llama a la funcion render a traves del objeto que se encuentra en el atributo templateEngine

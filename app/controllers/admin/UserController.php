@@ -17,6 +17,45 @@ class UserController extends BaseController{
     return $this->render('admin/insert-user.twig');
   }
 
+  public function getEdit($id){
+    $user=User::where('id',$id)->first();
+    return $this->render('admin/editar.twig',[
+      'usuario'=>$user
+    ]);
+  }
+
+  public function postEdit($id){
+    $errors=[];
+    $result=false;
+    $validator=new Validator();
+    $validator->add('name','required');
+    $validator->add('email','required');
+    $validator->add('email','email');
+
+
+    if($validator->validate($_POST)){
+
+      $user=User::where('id',$_POST['id'])->first();
+      $user->name=$_POST['name'];
+      $user->email=$_POST['email'];
+      if($_POST['password']!='')
+      {
+          $user->password=password_hash($_POST['password'],PASSWORD_DEFAULT);
+      }
+      $user->save();
+      $result=true;
+    }
+    else{
+      $errors=$validator->getMessages();
+    }
+
+    return $this->render('admin/editar.twig',[
+      'result'=>$result,
+      'errors'=>$errors,
+      'usuario'=>$user
+    ]);
+  }
+
   public function postCreate(){
     $errors=[];
     $result=false;
@@ -24,7 +63,7 @@ class UserController extends BaseController{
     $validator->add('name','required');
     $validator->add('email','required');
     $validator->add('email','email');
-    $validator->add('name','required');
+    $validator->add('password','required');
 
     if($validator->validate($_POST)){
       $user=new User();
